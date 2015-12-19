@@ -5,11 +5,13 @@ Created on Wed Jul 18 18:09:25 2012
 @author: janak
 """
 
+from __future__ import print_function
+
 import numpy as np
 import scipy as sp
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-	
+
 
 def edist(a, b):
 	n = len(a)
@@ -32,7 +34,7 @@ def dtw(a, b):
 	for i in range(1, n+1):
 		for j in range(1, m+1):
 			DTW[i][j] = dist(a[i-1], b[j-1]) + min(DTW[i-1][j], DTW[i][j-1], DTW[i-1][j-1])
-	print DTW
+	print(DTW)
 	return DTW[n][m]
 
 
@@ -47,7 +49,7 @@ def lcss(a, b):
 				LCSS[i][j] = LCSS[i-1][j-1] + 1
 			else:
 				LCSS[i][j] = max(LCSS[i][j-1], LCSS[i-1][j])
-	print LCSS
+	print(LCSS)
 	return 1 - LCSS[n][m] / min(n, m)
 
 
@@ -58,9 +60,9 @@ b = np.sin(x/10)+np.cos(x/5-80)/2
 
 e = edist(a, b)
 if e >= 0:
-	print "edist = ", e
-print "dtw = ", dtw(a, b)
-print "lcss = ", lcss(a, b)
-#plt.plot(x, a)
-#plt.plot(x, b)
-#plt.show()
+	print("edist = {}".format(e))
+print("dtw = {}".format(dtw(a, b)))
+print("lcss = {}".format(lcss(a, b)))
+plt.plot(x, a)
+plt.plot(x, b)
+plt.show()
